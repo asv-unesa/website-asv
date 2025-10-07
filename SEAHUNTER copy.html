@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SEAHUNTER</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style copy.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <!-- <link rel="preconnect" href="https://maps.google.com"> -->
+    
+    <style>
+        /* Preloader styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white; /* url('/Images SH/Seahunter.png') no-repeat center center; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
+        }
+
+        .preloader.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .preloader-logo {
+            width: 175px;
+            height: 175px;
+            animation: rotate-scale 2s ease-in-out infinite;
+        }
+
+        .preloader-text {
+            color: white;
+            margin-top: 20px;
+            font-size: 24px;
+            opacity: 0;
+            animation: fade-in 1s ease forwards;
+        }
+
+        @keyframes rotate-scale {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.2);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .preloader-text-logo {
+            display: block;
+            width: 100%;
+            font-weight: bold;
+            font-size: 32px;
+            color: #7f7f7f; /* Fixed missing # */
+            margin: 5px;
+            overflow: hidden;
+        }
+
+        .preloader-text-logo .run-text {
+            display: inline-block;
+            white-space: nowrap;
+            transform: translateX(100%);
+            animation: run-from-right 2s linear 1 forwards;
+            color: black;
+        }
+
+        @keyframes run-from-right {
+            0% {
+                transform: translateX(-110%);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
+
+        /* @keyframes pop-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            25% {
+                opacity: 0.5;
+                transform: scale(1.1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+            75% {
+                opacity: 1;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        } */
+
+        /* Hide content initially */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .main-content.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <img src="Seahunter.png" alt="SEAHUNTER" class="preloader-logo" id="SEAHUNTER">
+            <div class="preloader-text">SEAHUNTER</div>
+            <h1 class="preloader-text-logo"><span class="run-text">SEAHUNTER 2025</span></h1>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="main-content">
+    <div class="container-fluid text-center justify-content-center align-items-center py-4" style="background-color: blue;">
+        <!-- <div class="Head align-items-center"> -->
+        <div class="row g-xxl-5 d-flex align-items-center justify-content-center">
+            <div class="col-2 py-1 d-flex justify-content-center">
+                <img src="Logo_Universitas_Negeri_Surabaya_Terbaru.png" class="img-fluid rounded float-md-none"
+                alt="Logo Universitas Negeri Surabaya" title="Logo Universitas Negeri Surabaya" id="Logo">
+            </div>
+            <div class="col-6 text-center pt-3">
+                <div class="Tag"> 
+                    <h1 class="Univ text-center">UNIVERSITAS NEGERI SURABAYA</h1> 
+                    <h1 class="Team text-center">SEAHUNTER</h1>
+                </div>
+            </div>
+            <div class="col-2 py-1">
+                <img src="Logo_KEMENDIKTI.png" class="img-fluid rounded float-md-none"
+                alt="Logo KEMENDIKTI" title="Logo KEMENDIKTI" id="Logo">
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+    
+    <!-- Pemisah -->
+    <!-- Main Content -->
+
+    <!-- Left/ Position Log -->
+    <div class="container-fluid bg-light">
+        <div class="row"> <!--Row is horizontal, col is vertical-->
+            <div class="col-md-3 p-3 order-1">
+                <h2 class="m-3 border-start border-primary border-5 text-center">
+                    <i class="ri-navigation-fill me-2">Position Log</i>
+                </h2>
+                <div class="Details py-1">
+                    <ul class="list-unstyled" id="position-log">
+                        <li class="text m-3 p-3" tabindex="0" role="button">
+                            <i class="ri-play-circle-fill me-2">Preparation</i>
+                        </li>
+                        <li class="text m-3 p-3" tabindex="0" role="button">
+                            <i class="ri-rocket-fill me-2">Start</i>
+                        </li>
+                        <li class="text m-3 p-3" tabindex="0" role="button">
+                            <i class="ri-bubble-chart-fill me-2">Floating Ball</i>
+                        </li>
+                        <li class="text m-3 p-3" tabindex="0" role="button">
+                            <i class="ri-water-flash-fill me-2">Surface</i>
+                        </li>
+                        <li class="text m-3 p-3" tabindex="0" role="button">
+                            <i class="ri-submarine-fill me-2">Underwater</i>
+                        </li>
+                        <li class="text m-3 p-3" tabindex="0" role="button">
+                            <i class="ri-flag-fill me-2">Finish</i>
+                        </li>
+
+                        <!-- <button class="btn btn-danger rounded-pill px-5" type="button">Preparation</button>
+                        <button class="btn btn-danger rounded-pill px-5" type="button">Position</button>
+                        <button class="btn btn-danger rounded-pill px-5" type="button">Start</button>
+                        <button class="btn btn-danger rounded-pill px-5" type="button">Floating Ball</button>
+                        <button class="btn btn-danger rounded-pill px-5" type="button">Surface</button>
+                        <button class="btn btn-danger rounded-pill px-5" type="button">Underwater</button>
+                        <button class="btn btn-danger rounded-pill px-5" type="button">Finish</button> -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mid -->
+            <div class="col-md-4 p-3 order-2"> <!--Padding (p) is distance inside element, while Margin (m) distance outside element-->
+                <h2 class="m-3 pb-3 text-center">
+                    <i class="ri-camera-ai-fill me-2">Image Processing</i>
+                </h2>
+                <div class="Mid text-center px-1">
+                    <div class="status-box p-3 m-2"> 
+                        <h2 class="Surface">
+                            <i class="ri-water-flash-fill me-2">Surface</i>
+                        </h2>
+
+                        <!-- area gambar -->
+                        <div class="text-center mb-2">
+                            <img id="surface-image" class="img-fluid rounded d-none" src="" alt="Surface Camera" style="max-height:200px; object-fit:cover;">
+                        </div> 
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-0">
+                        <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
+                            <i class="ri-speed-up-fill"></i>
+                            <span class="h6 d-block fw-bold">SOG</span>
+                            <span class="h4 text-muted" id="surface-sog">0.0 kts</span>
+                        </div>
+                        <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
+                            <i class="ri-compass-3-fill"></i>
+                            <span class="h6 d-block fw-bold">COG</span>
+                            <span class="h4 text-muted" id="surface-cog">0°</span>
+                        </div>
+                        <div class="status-box-indicator m-1 p-1 flex-fill" style="max-width: 140px;">
+                            <i class="ri-map-pin-fill"></i>
+                            <span class="h6 d-block fw-bold">Position</span>
+                            <span class="small text-muted" id="surface-pos">0.000°, 0.000°</span>
+                        </div>
+                    </div>
+
+                    <div class="status-box p-3 m-2">
+                        <h2 class="Underwater">
+                            <i class="ri-submarine-fill me-2">Underwater</i>
+                        </h2>
+
+                        <!-- area gambar -->
+                        <div class="text-center mb-2">
+                            <img id="underwater-image" class="img-fluid rounded d-none" src="" alt="Underwater Camera" style="max-height:200px; object-fit:cover;">
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center gap-0">
+                        <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
+                            <i class="ri-speed-up-fill"></i>
+                            <span class="h6 d-block fw-bold">SOG</span>
+                            <span class="h4 text-muted" id="under-sog">0.0 kts</span>
+                        </div>
+                        <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
+                            <i class="ri-compass-3-fill"></i>
+                            <span class="h6 d-block fw-bold">COG</span>
+                            <span class="h4 text-muted" id="under-cog">0°</span>
+                        </div>
+                        <div class="status-box-indicator m-1 p-1 flex-fill" style="max-width: 140px;">
+                            <i class="ri-map-pin-fill"></i>
+                            <span class="h6 d-block fw-bold">Position</span>
+                            <span class="small text-muted" id="under-pos">0.000°, 0.000°</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right -->
+            <div class="col-md-5 p-3 order-3">
+                <h2 class="m-3 text-center">
+                    <i class="ri-map-2-fill me-2">Map Trajectory</i>
+                </h2>
+                <div class="Right p-3">
+                    <div class="map text-center justify-content-center align-content-center">
+                        <div id="date" class="m-3"></div>
+                        <div class="row full-height">
+                        <!-- Map on the right -->
+                            <div class="col">
+                                <div class="map-container ms-4 justify-content-center align-items-center align-content-center">
+                                <!-- This contains map -->
+                                    <div id="map" style="width:100%; height:100%; border:none;" loading="Lazy";
+                                    title="Map showing location" class="map-tracker"></div>
+                                    
+                                    <div class="compass-container">
+                                        <div class="compass">
+                                            <div class="compass-arrow"></div>
+                                            <div class="compass-direction compass-n">N</div>
+                                            <div class="compass-direction compass-e">E</div>
+                                            <div class="compass-direction compass-s">S</div>
+                                            <div class="compass-direction compass-w">W</div>
+                                            <div class="compass-center"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Overlay indicator -->
+                                    <div class="map-overlay d-flex justify-content-center gap-0">
+                                        <div class="status-box-indicator-map m-1 py-1 flex-fill" style="max-width: 50px;">
+                                            <span class="h6 d-block fw-bold">SOG</span>
+                                            <span class="h4 text-muted">0.0 kts</span>
+                                        </div>
+                                        <div class="status-box-indicator-map m-1 py-1 flex-fill" style="max-width: 50px;">
+                                            <span class="h6 d-block fw-bold">COG</span>
+                                            <span class="h4 text-muted">0°</span>
+                                        </div>
+                                        <div class="status-box-indicator-map m-1 p-1 flex-fill" style="max-width: 70px;">
+                                            <span class="h6 d-block fw-bold">Position</span>
+                                            <span class="small text-muted">0.000°, 0.000°</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-3">
+                        <div class="status-box-indicator p-2 flex-fill me-2">
+                            <i class="ri-settings-3-fill"></i>
+                            <span class="h6 d-block fw-bold">Mode</span>
+                            <span class="small text-muted">Auto</span>
+                        </div>
+                        <div class="status-box-indicator p-2 flex-fill">
+                            <i class="ri-battery-2-fill"></i>
+                            <span class="h6 d-block fw-bold">Battery</span>
+                            <span class="small text-success">V</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div> <!-- Close main-content -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://rawcdn.githack.com/bbecquet/Leaflet.RotatedMarker/master/leaflet.rotatedMarker.js"></script>
+
+    <!-- Script map improvment -->
+    <script src= "map.js" ></script>
+
+    <!-- Custom Scripts -->
+    <script>
+        // Improved clock function with performance optimization
+        function updateClock() {
+            const clockElement = document.getElementById("clock");
+            // get element by ID and set innerHTML
+            const dateElement = document.getElementById("date");
+
+            // Date script
+            const Day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const Month = ["January", "February", "March", "April", "May", "June", "July",
+            "August", "September", "October", "November", "December"];
+
+            function update() {
+                const now = new Date();
+
+                //Clock
+                const timeString = now.toLocaleTimeString(undefined, {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+
+                // get today's date
+                const day = Day[now.getDay()];
+                const date = now.getDate();
+                const month = Month[now.getMonth()];
+                const year = now.getFullYear();
+                const dateString = `${day}, ${date} ${month} ${year} | ${timeString}`;
+
+                if (clockElement) clockElement.textContent = timeString;
+                if (dateElement) dateElement.textContent = dateString;
+            }
+
+            update();
+            setInterval(update, 1000);
+        }
+
+        // Initialize clock
+        document.addEventListener("DOMContentLoaded", updateClock);
+
+        // // Add smooth transitions for status boxes
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     document.querySelectorAll('.status-box', '.status-box-indicator').forEach(el => {
+        //         el.addEventListener('mouseover', () => {
+        //             el.style.transform = 'translateY(-5px)';
+        //         });
+        //         box.addEventListener('mouseout', () => {
+        //             box.style.transform = 'translateY(0)';
+        //         });
+        //     });
+        // });
+
+        // Lazy load map-tracker
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const mapFrame = document.querySelector('.map-container .map-tracker');
+        //     if (mapFrame) {
+        //         mapFrame.loading = 'lazy';
+        //     }
+        // });
+
+        // Preloader optimization
+        window.addEventListener('load', () => {
+            const preloader = document.querySelector('.preloader');
+            const mainContent = document.querySelector('.main-content');
+            const runText = document.querySelector('.preloader-text-logo .run-text');
+            
+            const finishPreloader = () => {
+                if (!preloader || !mainContent) return;
+                preloader.classList.add('fade-out');
+                mainContent.classList.add('visible');
+
+                // Remove from DOM after animation for better performance
+                setTimeout(() => {
+                    preloader.remove();
+                }, 1000);
+            };
+
+            if (runText) {
+                runText.addEventListener('animationend', finishPreloader, {once: true});
+                setTimeout(finishPreloader, 2200); // Fallback
+            } else {
+                setTimeout(finishPreloader, 2000);
+            }
+        });
+
+        // Enhanced status box interactions
+        function setActivePosition(positionName){
+            const items = document.querySelectorAll('.text[role="button"]');
+            let targetItem = null;
+
+            //Cari berdasarkan teks
+            items.forEach(el => {
+                const textContent = el.textContent.trim().toLowerCase();
+                if (textContent.includes(positionName.toLowerCase())) {
+                    targetItem = el;
+                }
+            });
+            
+            if (!targetItem) {
+                console.warn(`Position "${positionName}" tidak ditemukan di daftar.`);
+                return;
+            }
+
+            //Jika sudah aktif → matikan
+            if (targetItem.classList.contains('active')) {
+                targetItem.classList.remove('active');
+            } else {
+                //Hapus active dari semua item lain
+                items.forEach(el => el.classList.remove('active'));
+                // aktifkan target
+                targetItem.classList.add('active');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add click handlers for position log items
+            document.querySelectorAll('.text[role="button"]').forEach(item => {
+                item.addEventListener('click', () => {
+                setActivePosition(item.textContent.trim());
+                });
+            });
+
+            // Lazy load optimizations
+            // const mapFrame = document.querySelector('.map-container map-tracker');
+            // if (mapFrame) {
+            //     mapFrame.addEventListener('load', () => {
+            //         mapFrame.parentElement.classList.remove('loading-shimmer');
+            //     });
+            // }
+        });
+    </script>
+</body>
+</html>
