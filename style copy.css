@@ -118,6 +118,14 @@ body {
     outline-offset: 2px;
 }
 
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+}
+
 /* Map styles with enhanced design */
 .map-container {
     background: linear-gradient(145deg, #eaeaea, #f5f5f5);
