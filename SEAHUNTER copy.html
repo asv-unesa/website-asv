@@ -123,8 +123,7 @@
     </div>
 
     <!-- Main Header -->
-    <div class="main-content">
-    <div class="container-fluid text-center justify-content-center align-items-center py-4" style="background-color: blue;">
+    <header class="container-fluid text-center justify-content-center align-items-center py-2" style="background-color: blue;">
         <!-- <div class="Head align-items-center"> -->
         <div class="row g-xxl-5 d-flex align-items-center justify-content-center">
             <div class="col-2 py-1 d-flex justify-content-center">
@@ -134,7 +133,7 @@
             <div class="col-6 text-center pt-3">
                 <div class="Tag"> 
                     <h1 class="Univ text-center">UNIVERSITAS NEGERI SURABAYA</h1> 
-                    <h1 class="Team text-center">SEAHUNTER</h1>
+                    <h1 class="Team text-center" title="Jaya Jaya Jaya JUARA!!!">SEAHUNTER</h1>
                 </div>
             </div>
             <div class="col-2 py-1">
@@ -143,36 +142,37 @@
             </div>
         </div>
         <!-- </div> -->
-    </div>
-    
-    <!-- Main Content -->
+    </header>
 
+    <!-- Main Content -->
+    <div class="main-content">
     <!-- Left/Position Log -->
+
     <div class="container-fluid bg-light">
         <div class="row"> <!--Row is horizontal, col is vertical-->
             <div class="col-md-3 p-3 order-1">
                 <h2 class="m-3 border-start border-primary border-5 text-center">
-                    <i class="ri-navigation-fill me-2">Position Log</i>
+                    <i class="ri-navigation-fill fw-bold me-2">Position Log</i>
                 </h2>
                 <div class="Details py-1">
                     <ul class="list-unstyled" id="position-log">
-                        <li class="text m-3 p-3" tabindex="0" role="button">
+                        <li class="text m-4 p-3" tabindex="0" role="button">
                             <i class="ri-play-circle-fill me-2"></i>Preparation
                         </li>
-                        <li class="text m-3 p-3" tabindex="0" role="button">
+                        <li class="text m-4 p-3" tabindex="0" role="button">
                             <i class="ri-rocket-fill me-2"></i>Start
                         </li>
-                        <li class="text m-3 p-3" tabindex="0" role="button">
+                        <li class="text m-4 p-3" tabindex="0" role="button">
                             <i class="ri-bubble-chart-fill me-2"></i>Floating Ball
                         </li>
-                        <li class="text m-3 p-3" tabindex="0" role="button">
+                        <li class="text m-4 p-3" tabindex="0" role="button">
                             <i class="ri-water-flash-fill me-2"></i>Surface
                         </li>
-                        <li class="text m-3 p-3" tabindex="0" role="button">
+                        <li class="text m-4 p-3" tabindex="0" role="button">
                             <span class="material-symbols-outlined me-0">water</span>
                             <i class="ri-submarine-fill"></i>Underwater
                         </li>
-                        <li class="text m-3 p-3" tabindex="0" role="button">
+                        <li class="text m-4 p-3" tabindex="0" role="button">
                             <i class="ri-flag-fill me-2"></i>Finish
                         </li>
                     </ul>
@@ -181,87 +181,83 @@
 
             <!-- Mid/Image Processing -->
             <div class="col-md-4 p-3 order-2"> <!--Padding (p) is distance inside element, while Margin (m) distance outside element-->
-                <h2 class="m-3 pb-3 text-center">
-                    <i class="ri-multi-image-line me-2">Image Processing</i>
+                <h2 class="m-3 pb-2 text-center">
+                    <i class="ri-multi-image-line fw-bold me-2">Image Processing</i>
                     <!-- <i class="ri-camera-ai-fill me-2">Image Processing</i> -->
                 </h2>
                 <div class="Mid text-center px-1">
 
-                    <!-- <h2 class="Surface">
+                    <h2 class="Surface">
                         <i class="ri-water-flash-fill me-2">Surface</i>
-                    </h2> -->
+                    </h2>
                     <div class="status-box p-3 m-2"> 
-                        <h2 class="Surface">
-                            <i class="ri-water-flash-fill me-2">Surface</i>
-                        </h2>
                         <!-- area gambar -->
-                        <div class="text-center mb-2">
-                            <img id="surface-image" class="img-fluid rounded d-none" src="ship.png" alt="Surface Camera" style="max-height:200px; object-fit:cover;">
-                        </div> 
+                        <div class="text-center mb-2 mx-auto" style="min-height: 100px; max-height: 220px; max-width: 270px;">
+                            <img id="surface-image" class="img-fluid rounded d-none" src="" alt="Surface Camera" 
+                            style="object-fit: contain; width: 100%; height: 100%; max-height: 200px;">
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-0 image-overlay-indicator">
+                            <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
+                                <!-- <i class="ri-speed-up-fill"></i> -->
+                                <span class="h6 d-block fw-bold">SOG</span>
+                                <span class="h4 text-muted" id="surface-sog">0.0 kts</span>
+                            </div>
+                            <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
+                                <!-- <i class="ri-compass-3-fill"></i> -->
+                                <span class="h6 d-block fw-bold">COG</span>
+                                <span class="h4 text-muted" id="surface-cog">0°</span>
+                            </div>
+                            <div class="status-box-indicator m-1 p-1 flex-fill" style="max-width: 140px;">
+                                <!-- <i class="ri-map-pin-fill"></i> -->
+                                <span class="h6 d-block fw-bold">Position</span>
+                                <span class="small text-muted" id="surface-pos">0.000°, 0.000°</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="d-flex justify-content-center gap-0">
-                        <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
-                            <i class="ri-speed-up-fill"></i>
-                            <span class="h6 d-block fw-bold">SOG</span>
-                            <span class="h4 text-muted" id="surface-sog">0.0 kts</span>
-                        </div>
-                        <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
-                            <i class="ri-compass-3-fill"></i>
-                            <span class="h6 d-block fw-bold">COG</span>
-                            <span class="h4 text-muted" id="surface-cog">0°</span>
-                        </div>
-                        <div class="status-box-indicator m-1 p-1 flex-fill" style="max-width: 140px;">
-                            <i class="ri-map-pin-fill"></i>
-                            <span class="h6 d-block fw-bold">Position</span>
-                            <span class="small text-muted" id="surface-pos">0.000°, 0.000°</span>
-                        </div>
-                    </div>
-
-                    <!-- <h2 class="Underwater">
+                    <h2 class="Underwater">
                         <span class="material-symbols-outlined me-0">water</span>
                         <i class="ri-submarine-fill me-2">Underwater</i>
-                    </h2> -->
+                    </h2>
                     <div class="status-box p-3 m-2">
-                        <h2 class="Underwater">
-                            <span class="material-symbols-outlined me-0">water</span>
-                            <i class="ri-submarine-fill me-2">Underwater</i>
-                        </h2>
                         <!-- area gambar -->
-                        <div class="text-center mb-2">
-                            <img id="underwater-image" class="img-fluid rounded d-none" src="" alt="Underwater Camera" style="max-height:200px; object-fit:cover;">
+                        <div class="text-center mb-2 mx-auto" style="min-height: 100px; max-height: 220px; max-width: 270px;">
+                            <img id="underwater-image" class="img-fluid rounded d-none" src="" alt="Underwater Camera" 
+                            style="object-fit: contain; width: 100%; height: 100%; max-height: 200px;">
+                        </div>
+
+                        <div class="d-flex justify-content-center gap-0 image-overlay-indicator">
+                            <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
+                                <!-- <i class="ri-speed-up-fill"></i> -->
+                                <span class="h6 d-block fw-bold">SOG</span>
+                                <span class="h4 text-muted" id="under-sog">0.0 kts</span>
+                            </div>
+                            <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
+                                <!-- <i class="ri-compass-3-fill"></i> -->
+                                <span class="h6 d-block fw-bold">COG</span>
+                                <span class="h4 text-muted" id="under-cog">0°</span>
+                            </div>
+                            <div class="status-box-indicator m-1 p-1 flex-fill" style="max-width: 140px;">
+                                <!-- <i class="ri-map-pin-fill"></i> -->
+                                <span class="h6 d-block fw-bold">Position</span>
+                                <span class="small text-muted" id="under-pos">0.000°, 0.000°</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-center gap-0">
-                        <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
-                            <i class="ri-speed-up-fill"></i>
-                            <span class="h6 d-block fw-bold">SOG</span>
-                            <span class="h4 text-muted" id="under-sog">0.0 kts</span>
-                        </div>
-                        <div class="status-box-indicator m-1 py-1 flex-fill" style="max-width: 90px;">
-                            <i class="ri-compass-3-fill"></i>
-                            <span class="h6 d-block fw-bold">COG</span>
-                            <span class="h4 text-muted" id="under-cog">0°</span>
-                        </div>
-                        <div class="status-box-indicator m-1 p-1 flex-fill" style="max-width: 140px;">
-                            <i class="ri-map-pin-fill"></i>
-                            <span class="h6 d-block fw-bold">Position</span>
-                            <span class="small text-muted" id="under-pos">0.000°, 0.000°</span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <!-- Right/Map Trajectory -->
-            <div class="col-md-5 p-3 order-3">
+            <div class="col-md-5 p-3 order-3 d-flex flex-column">
                 <h2 class="m-3 text-center">
-                    <i class="ri-map-2-fill me-2">Map Trajectory</i>
+                    <i class="ri-map-2-fill fw-bold me-2">Map Trajectory</i>
                 </h2>
-                <div class="Right p-3">
-                    <div class="map text-center justify-content-center align-content-center">
+                <div class="Right p-3 flex-grow-1 d-flex flex-column">
+                    <div class="map text-center align-content-center flex-grow-1 d-flex flex-column">
                         <div id="date" class="m-3"></div>
-                        <div class="row full-height">
+                        <div class="row full-height flex-grow-1">
                         <!-- Map on the right -->
                             <div class="col">
                                 <div class="map-container ms-4 justify-content-center align-items-center align-content-center">
@@ -300,12 +296,12 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-between mt-3">
-                        <div class="status-box-indicator p-2 flex-fill me-2">
+                        <div class="camera-indicator p-2 flex-fill me-2">
                             <i class="ri-settings-3-fill"></i>
                             <span class="h6 d-block fw-bold">Mode</span>
                             <span class="small text-muted">Auto</span>
                         </div>
-                        <div class="status-box-indicator p-2 flex-fill">
+                        <div class="mode-indicator p-2 flex-fill">
                             <i class="ri-video-on-line"></i>
                             <span class="h6 d-block fw-bold">Camera</span>
                             <span class="small text-muted">Front</span>
@@ -459,6 +455,14 @@
             //     });
             // }
         });
+
+        // Dummy load images
+        let surfaceImgae = document.getElementById('surface-image');
+            surfaceImgae.src = '/website-asv/Seahunter.png';
+            surfaceImgae.classList.remove('d-none');
+        let underwaterImage = document.getElementById('underwater-image');
+            underwaterImage.src = '/website-asv/ship.png';
+            underwaterImage.classList.remove('d-none');
     </script>
 </body>
 </html>
