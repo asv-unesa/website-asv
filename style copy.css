@@ -564,9 +564,89 @@ body {
 }
 
 /* Responsive design */
-@media (min-width: 769px) and (max-width: 1102px) {
+@media screen and (max-width: 576px) {
+    .container-fluid .row {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    #Logo {
+        max-height: 60px;
+    }
+
+    .Tag h1 {
+        font-size: 0.9rem;
+        padding: 0rem;
+    }
+
+    .full-height {
+        height: 50vh;
+    }
+
+    .map-container {
+        height: 48vh;
+    }
+
+    .col-md-3, .col-md-4, .col-md-5 {
+        padding: 0.5rem;
+    }
+
+    .status-box-indicator-map {
+        max-width: 100px;
+        font-size: 0.1rem;
+        padding: 0.75rem;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+    .container-fluid .row {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .Tag h1 {
+        font-size: 1.2rem;
+    }
+
+    #Logo {
+        height: 80px;
+    }
+
+    .full-height {
+        height: 50vh;
+    }
+
+    .map-container {
+        height: 48vh;
+    }
+
+    .text {
+        margin: 0.5rem !important;
+        padding: 0.5rem !important;
+    }
+
+    #clock, #date {
+        font-size: 2rem;
+    }
+
+    .status-box-indicator-map {
+        max-width: 80px;
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1102px) {
     .Tag .h1 {
-        font-size: 1.7rem;
+        font-size: 1.4rem;
     }
 
     #Logo {
@@ -623,85 +703,6 @@ body {
     }
 }
 
-@media (max-width: 768px) {
-    .container-fluid .row {
-        display: flex;
-        flex-direction: row;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    .Tag h1 {
-        font-size: 1.5rem;
-    }
-
-    #Logo {
-        height: 80px;
-    }
-
-    .full-height {
-        height: 50vh;
-    }
-
-    .map-container {
-        height: 48vh;
-    }
-
-    .text {
-        margin: 0.5rem !important;
-        padding: 0.5rem !important;
-    }
-
-    #clock, #date {
-        font-size: 2rem;
-    }
-
-    .status-box-indicator-map {
-        max-width: 80px;
-        font-size: 0.75rem;
-        padding: 0.5rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .container-fluid .row {
-        display: flex;
-        flex-direction: row;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-    }
-
-    #Logo {
-        max-height: 60px;
-    }
-
-    .Tag h1 {
-        font-size: 1.2rem;
-    }
-
-    .full-height {
-        height: 40vh;
-    }
-
-    .map-container {
-        height: 38vh;
-    }
-
-    .col-md-3, .col-md-4, .col-md-5 {
-        padding: 0.5rem;
-    }
-
-    .status-box-indicator-map {
-        max-width: 100px;
-        font-size: 0.1rem;
-        padding: 0.75rem;
-    }
-}
-
 /* Smooth scrolling for the whole page */
 html {
     scroll-behavior: smooth;
@@ -716,9 +717,11 @@ html {
     animation: pulse-blue 2s ease-in-out infinite;
 }
 
-div.camera-indicator i.ri-settings-3-fill,
+.ri-settings-3-fill,
 .ri-compass-3-fill {
-    animation: rotate-smooth 4s linear infinite;
+    display: inline-block;
+    animation: rotate-smooth 2s linear infinite;
+    /* transform-origin: center; */
 }
 
 .ri-map-pin-fill,
